@@ -3,92 +3,101 @@ from PIL import Image
 
 st.set_page_config(page_title="My Interactive Portfolio", layout="wide")
 
-# Top Navigation Bar
-st.markdown("""
-<style>
-.navbar {
-    background: linear-gradient(to right, #673ab7, #3f51b5);
-    padding: 12px 0;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.navbar a {
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    margin: 0 20px;
-    font-size: 1rem;
-}
-.navbar a:hover {
-    color: #c5cae9;
-}
-.badge {
-    display: inline-block;
-    margin-top: 14px;
-    background: linear-gradient(to right, #7e57c2, #5c6bc0);
-    color: white;
-    padding: 8px 18px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 0.95rem;
-}
-</style>
+# Load images
+img1 = Image.open("m1.png")  # Multilanguage Chatbot
+img2 = Image.open("m2.png")  # Handwritten-to-Image Converter
+img3 = Image.open("m3.png")  # Portfolio Website
+img4 = Image.open("m4.png")  # LangChain News Summarizer
 
-<div class="navbar">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-</div>
+# Font Awesome + Styling
+st.markdown("""
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .stTabs [data-baseweb="tab-list"] {
+            justify-content: center;
+        }
+        .stTabs [role="tab"] {
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+        img {
+            border-radius: 10px;
+            max-height: 180px;
+            object-fit: cover;
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown("<h1 style='text-align: center; color: #3f51b5;'>My Interactive Portfolio</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Explore my skills, projects, and reach out to collaborate!</p>", unsafe_allow_html=True)
-st.markdown('<p class="badge" style="text-align:center; display:block;">Web & AI Developer</p>', unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #3f51b5;'>🚀 My Interactive Portfolio</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Explore my work, skills, and projects below.</p>", unsafe_allow_html=True)
 
-# About Section
-st.markdown('<a name="about"></a>', unsafe_allow_html=True)
-st.markdown("## About Me")
-st.write("I’m a developer passionate about combining web development with AI to build smart, user-friendly applications. I love working with multilingual NLP, generative models, and real-time interactions.")
+# Tabs
+tab1, tab2, tab3, tab4 = st.tabs(["👤 About", "⚙️ Skills", "📁 Projects", "📞 Contact"])
 
-# Skills Section
-st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
-st.markdown("## Skills")
-cols = st.columns(6)
-skills = ["HTML", "CSS", "JavaScript", "Python", "Flask", "TensorFlow"]
-for i, skill in enumerate(skills):
-    with cols[i]:
-        st.button(skill, key=skill)
+# About Tab
+with tab1:
+    st.markdown("## <i class='fas fa-user'></i> About Me", unsafe_allow_html=True)
+    st.write("I’m a developer passionate about combining web development with AI to build smart, user-friendly applications.")
+    st.write("I love working with multilingual NLP, generative models, and real-time interactions.")
 
-# Projects Section
-st.markdown('<a name="projects"></a>', unsafe_allow_html=True)
-st.markdown("## Projects")
+# Skills Tab
+with tab2:
+    st.markdown("## <i class='fas fa-cogs'></i> Skills", unsafe_allow_html=True)
+    cols = st.columns(6)
+    skills = ["HTML", "CSS", "JavaScript", "Python", "Flask", "TensorFlow"]
+    for i, skill in enumerate(skills):
+        with cols[i]:
+            st.button(skill, key=skill)
 
-# Load images
-img1 = Image.open("m1.png")
-img2 = Image.open("m2.png")
-img3 = Image.open("m3.png")
+# Projects Tab
+with tab3:
+    st.markdown("## <i class='fas fa-project-diagram'></i> Projects", unsafe_allow_html=True)
 
-# Project 1
-st.image(img1, caption="Multilanguage Chatbot", use_column_width=True)
-st.write("**Multilanguage Chatbot**  \nSupports multiple languages with AI tools for loan guidance and document checks.  \n[View Project](https://github.com/avi-2004-kg/Multilanguage-chatbot)")
+    # First row
+    row1_col1, row1_col2 = st.columns(2)
 
-# Project 2
-st.image(img2, caption="Handwritten-to-Image Converter", use_column_width=True)
-st.write("**Handwritten-to-Image Converter**  \nAI model that converts text into visual content using generative tools.  \n[Try Demo](https://github.com/avi-2004-kg/Handwritten-To-image-converter)")
+    with row1_col1:
+        st.image(img1, caption="Multilanguage Chatbot", use_container_width=True)
+        st.markdown("""
+        **Multilanguage Chatbot**  
+        Supports multiple languages with AI tools for loan guidance and document checks.  
+        [🔗 View Project](https://github.com/avi-2004-kg/Multilanguage-chatbot)
+        """)
 
-# Project 3
-st.image(img3, caption="Portfolio Website", use_column_width=True)
-st.write("**Portfolio Website**  \nFully responsive personal portfolio to showcase skills and projects.  \n[View Site](#)")
+    with row1_col2:
+        st.image(img2, caption="Handwritten-to-Image Converter", use_container_width=True)
+        st.markdown("""
+        **Handwritten-to-Image Converter**  
+        AI model that converts text into visual content using generative tools.  
+        [🔗 Try Demo](https://github.com/avi-2004-kg/Handwritten-To-image-converter)
+        """)
 
-# Contact Section
-st.markdown('<a name="contact"></a>', unsafe_allow_html=True)
-st.markdown("## Contact")
-st.write("📧 Email: [kgavinash0@gmail.com](mailto:kgavinash0@gmail.com)  \n📞 Phone: [9902174350](tel:+1234567890)")
+    # Second row
+    row2_col1, row2_col2 = st.columns(2)
+
+    with row2_col1:
+        st.image(img3, caption="Portfolio Website", use_container_width=True)
+        st.markdown("""
+        **Portfolio Website**  
+        Fully responsive personal portfolio to showcase skills and projects.  
+        [🔗 View Site](#)
+        """)
+
+    with row2_col2:
+        st.image(img4, caption="LangChain News Summarizer", use_container_width=True)
+        st.markdown("""
+        **LangChain-of-News-Summarizer-Translator**  
+        Summarizes and translates latest news articles using LangChain and NLP tools.  
+        [🔗 View Project](https://github.com/avi-2004-kg/LangChain-of-News-Summarizer-Translator)
+        """)
+
+# Contact Tab
+with tab4:
+    st.markdown("## <i class='fas fa-envelope'></i> Contact", unsafe_allow_html=True)
+    st.write("📧 Email: [kgavinash0@gmail.com](mailto:kgavinash0@gmail.com)")
+    st.write("📞 Phone: [+91 9902174350](tel:+919902174350)")
+    st.write("💼 GitHub: [github.com/avi-2004-kg](https://github.com/avi-2004-kg)")
 
 # Footer
 st.markdown("<hr><p style='text-align: center;'>&copy; 2025 My Portfolio</p>", unsafe_allow_html=True)
